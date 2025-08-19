@@ -23,14 +23,6 @@ void Union(int a,int b)
     else parent[a]=b;
 }
 
-bool Find(int a,int b)
-{
-    a=getParent(a);
-    b=getParent(b);
-    if(a==b) return true;
-    return false;
-}
-
 int main()
 {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
