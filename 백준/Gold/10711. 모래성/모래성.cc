@@ -25,28 +25,22 @@ void init()
                 grid[h][w]=c-'0';
         }
     }
-
-    for(int h=0;h<H;h++)
-    {
-        for(int w=0;w<W;w++)
-        {
-            if(grid[h][w]!=0) continue;
-            
-            for(int i=0;i<8;i++)
-            {
-                int nh=h+dh[i];
-                int nw=w+dw[i];
-                if(nh<0 or nh>=H or nw<0 or nw>=W) continue;
-
-                if(grid[nh][nw]!=0)
-                    cnt[nh][nw]++;
-            }
-        }
-    }
 }
 
 void bfs()
 {
+    for(int h=1;h<H-1;h++)
+    {
+        for(int w=1;w<W-1;w++)
+        {
+            if(grid[h][w]!=0 and grid[h][w]<=cnt[h][w])
+            {
+                visited[h][w]=true;
+                q.push({h,w});
+            }
+        }
+    }
+
     while(!q.empty())
     {
         int Size=q.size();
@@ -78,14 +72,20 @@ void bfs()
 
 void solve()
 {
-    for(int h=1;h<H-1;h++)
+    for(int h=0;h<H;h++)
     {
-        for(int w=1;w<W-1;w++)
+        for(int w=0;w<W;w++)
         {
-            if(grid[h][w]!=0 and grid[h][w]<=cnt[h][w])
+            if(grid[h][w]!=0) continue;
+            
+            for(int i=0;i<8;i++)
             {
-                visited[h][w]=true;
-                q.push({h,w});
+                int nh=h+dh[i];
+                int nw=w+dw[i];
+                if(nh<0 or nh>=H or nw<0 or nw>=W) continue;
+
+                if(grid[nh][nw]!=0)
+                    cnt[nh][nw]++;
             }
         }
     }
